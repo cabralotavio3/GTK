@@ -1,0 +1,32 @@
+Exercício Etapa 03:
+===================
+
+  - Salvar um dos arquivos como 'prog_A.pyw'.
+  - Alterar o arquivo 'prog_A.pyw' de modo que o programa:
+    - contenha um botão 'Sim' e um botão 'Não',
+    - contenha um rótulo com uma mensagem:
+
+            'O Sistema será restaurado.
+             Todos os dados pessoais serão perdidos.
+
+             Deseja restaurar?'
+
+    - quando o usuário levar o ponteiro para cima do botão 'Não'
+      os rótulos dos botões ('Sim' e 'Não') serão trocados de lugar ;-)
+    - a janela deverá ficar em modo tela cheia e não deverá exibir
+      a barra de título.
+    - quando o botão de rótulo 'Não' for pressionado a caixa contendo os
+      botões deverá se escondida e o rótulo deverá trazer a nova
+      mensagem:
+      
+            'Restauração em execução...'
+            
+    - apresente interface semelhante as capturas de telas presentes
+      na pasta imagens.
+      
+  - Métodos relevantes para a solução:
+      - jnl.fullscreen()
+      - cxh.hide()
+      
+  - Evento relevante para a solução:
+      "enter-notify-event"
