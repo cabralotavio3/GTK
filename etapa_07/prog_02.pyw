@@ -58,13 +58,12 @@ class Aplicacao:
         rtl = dados[0]
         cxv_botoes = dados[1]
 
-        dic = {}
         for botao in cxv_botoes.get_children():
             caracteristica = botao.get_label()
             estado = botao.get_active()
             if estado == True:
-                dic[caracteristica] = estado
-            rtl.set_markup('{}'.format(dic))
+                caracteristica = botao.get_label()
+            rtl.set_markup('Escolhido: {}'.format(caracteristica))
 
     def limpar(self, componente=None, dados=None):
         """limpa tudo"""
