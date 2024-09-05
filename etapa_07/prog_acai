@@ -1,0 +1,88 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+# Python e Gtk
+# Prof. Douglas Machado Tavares
+
+# Componente Botão de Visto - CheckButton
+
+import gi
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk
+
+
+class Aplicacao:
+    """ Define a interface da Aplicação """
+
+    def __init__(self):
+        """ __init__() -> instância de Aplicação """
+        jnl = Gtk.Window()
+        jnl.connect("delete-event", self.sair)
+        jnl.set_border_width(10)
+        jnl.set_title("Açaí é tudo de bom :-)")
+
+        cxv = Gtk.Box(orientation=Gtk.Orientation.VERTICAL,
+                        homogeneous=False, spacing=10)
+        
+        msg = "<span color='#950391'><b>.:: Açaí Super 10 ::.</b></span>"
+        rtl_acai = Gtk.Label(label=msg, use_markup=True)
+
+        cxh = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL,
+                        homogeneous=False, spacing=10)
+        
+        cxv_quadros = Gtk.Box(orientation=Gtk.Orientation.VERTICAL,
+                        homogeneous=False, spacing=10)
+        
+
+
+
+        
+
+        cxv_tamanho = Gtk.Box(orientation=Gtk.Orientation.VERTICAL,
+                        homogeneous=False, spacing=10)
+        
+        cxv_recipiente = Gtk.Box(orientation=Gtk.Orientation.VERTICAL,
+                        homogeneous=False, spacing=10)
+        
+        qdr_tamanho = Gtk.Frame(label="Tamanho:")
+        
+        tamanho = ["300ml", "400ml", "500ml", "600ml", "700ml"]
+        bte = None
+        for c in tamanho:
+            bte = Gtk.RadioButton(group =bte,label=c)
+          #  bte.connect('toggled', self.limpar, rtl)
+            cxv_tamanho.pack_start(bte, False, False, 0)
+        qdr_tamanho.add(cxv_tamanho)
+
+        qdr_recipiente = Gtk.Frame(label="recipiente:")
+
+        recipiente = ["Copo", "Tijela"]
+        bte = None
+        for c in recipiente:
+            bte = Gtk.RadioButton(group =bte,label=c)
+          #  bte.connect('toggled', self.limpar, rtl)
+            cxv_recipiente.pack_start(bte, False, False, 0)
+        qdr_recipiente.add(cxv_recipiente)
+
+        
+
+        cxv_quadros.pack_start(qdr_tamanho, False, False, 0)
+        cxv_quadros.pack_start(qdr_recipiente, False, False, 0)
+
+        cxh.add(cxv_quadros)
+
+        cxv.add(rtl_acai)
+        cxv.add(cxh)
+
+        jnl.add(cxv)
+        jnl.show_all()
+
+    def sair(self, componente=None, dados=None):
+        """ Finaliza a aplicação """
+        Gtk.main_quit()
+        raise SystemExit("Tchau!!!")
+
+
+if __name__ == "__main__":
+    prog = Aplicacao()
+    Gtk.main()
