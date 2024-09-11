@@ -28,14 +28,10 @@ class Aplicacao:
         rtl_acai = Gtk.Label(label=msg, use_markup=True)
 
         cxh = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL,
-                        homogeneous=False, spacing=10)
+                        homogeneous=True, spacing=10)
         
-        cxv_quadros = Gtk.Box(orientation=Gtk.Orientation.VERTICAL,
+        cxv_1 = Gtk.Box(orientation=Gtk.Orientation.VERTICAL,
                         homogeneous=False, spacing=10)
-        
-
-
-
         
 
         cxv_tamanho = Gtk.Box(orientation=Gtk.Orientation.VERTICAL,
@@ -54,7 +50,7 @@ class Aplicacao:
             cxv_tamanho.pack_start(bte, False, False, 0)
         qdr_tamanho.add(cxv_tamanho)
 
-        qdr_recipiente = Gtk.Frame(label="recipiente:")
+        qdr_recipiente = Gtk.Frame(label="Recipiente:")
 
         recipiente = ["Copo", "Tijela"]
         bte = None
@@ -64,12 +60,34 @@ class Aplicacao:
             cxv_recipiente.pack_start(bte, False, False, 0)
         qdr_recipiente.add(cxv_recipiente)
 
+        cxv_1.pack_start(qdr_tamanho, False, False, 0)
+        cxv_1.pack_start(qdr_recipiente, False, False, 0)
+
+        cxv_2 = Gtk.Box(orientation=Gtk.Orientation.VERTICAL,
+                        homogeneous=False, spacing=10)
         
+        cxv_adicionais = Gtk.Box(orientation=Gtk.Orientation.VERTICAL,
+                        homogeneous=False, spacing=10)
 
-        cxv_quadros.pack_start(qdr_tamanho, False, False, 0)
-        cxv_quadros.pack_start(qdr_recipiente, False, False, 0)
+        qdr_adicionais = Gtk.Frame(label="Adicionais:")
+        
+        adicionais = ["a", "b", "c", "d", "d", "e", "f"]
+        bte = None
+        for c in adicionais:
+            bte = Gtk.CheckButton(label=c)
+          #  bte.connect('toggled', self.limpar, rtl)
+            cxv_adicionais.pack_start(bte, False, False, 0)
+        qdr_adicionais.add(cxv_adicionais)
 
-        cxh.add(cxv_quadros)
+        bt_enviar = Gtk.Button(label='_Enviar', use_underline=True)
+        bt_enviar.connect('clicked', self.fechar_pedido, [cxv_tamanho, cxv_recipiente, cxv_adicionais])
+
+
+        cxv_2.pack_start(qdr_adicionais, False, False, 0)
+        cxv_2.pack_end(bt_enviar, False, False, 0)
+
+        cxh.add(cxv_1)
+        cxh.add(cxv_2)
 
         cxv.add(rtl_acai)
         cxv.add(cxh)
@@ -81,6 +99,40 @@ class Aplicacao:
         """ Finaliza a aplicação """
         Gtk.main_quit()
         raise SystemExit("Tchau!!!")
+
+    def fechar_pedido(self, componente=None, dados=None):
+        """Nigga"""
+        cxv_tamanho = dados[0]
+        cxv_recipiente = dados[1]
+        cxv_adicionais = dados[2]
+
+        for botao in cxv_tamanho.get_children():
+            tamanho = botao.get_label()
+            estado = botao.get_active()
+            if estado == True:
+                tamanho = botao.get_label()
+                print(f"Tamanho: {tamanho}")
+
+        for botao in cxv_recipiente.get_children():
+            recipiente = botao.get_label()
+            estado = botao.get_active()
+            if estado == True:
+                recipiente = botao.get_label()
+                print(f"Recipiente: {recipiente}")
+
+        adic = []
+        for botao in cxv_adicionais.get_children():
+            adicional = botao.get_label()
+            estado = botao.get_active()
+            
+            if estado == True:
+                adicional = botao.get_label()
+                adic.append(adicional)
+        Prt = "Adicionais: "
+        for ad in adic:
+            Prt.append(ad)
+        print(Prt)
+
 
 
 if __name__ == "__main__":
