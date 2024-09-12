@@ -1,3 +1,6 @@
+#OTÁVIO CABRAL E MIGUEL COSTA 
+
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
@@ -71,7 +74,7 @@ class Aplicacao:
 
         qdr_adicionais = Gtk.Frame(label="Adicionais:")
         
-        adicionais = ["a", "b", "c", "d", "d", "e", "f"]
+        adicionais = ["Banana", "Passoca", "Chocolate", "Bis", "Morango", "Granola", "Leite em pó"]
         bte = None
         for c in adicionais:
             bte = Gtk.CheckButton(label=c)
@@ -85,12 +88,13 @@ class Aplicacao:
 
         cxv_2.pack_start(qdr_adicionais, False, False, 0)
         cxv_2.pack_end(bt_enviar, False, False, 0)
+        
 
         cxh.add(cxv_1)
         cxh.add(cxv_2)
 
         cxv.add(rtl_acai)
-        cxv.add(cxh)
+        cxv.pack_end(cxh, True, True, 0)
 
         jnl.add(cxv)
         jnl.show_all()
@@ -101,10 +105,11 @@ class Aplicacao:
         raise SystemExit("Tchau!!!")
 
     def fechar_pedido(self, componente=None, dados=None):
-        """Nigga"""
+        """Fecha o pedido do cliente e imprime um comprovante"""
         cxv_tamanho = dados[0]
         cxv_recipiente = dados[1]
         cxv_adicionais = dados[2]
+        print("-" * 80)
 
         for botao in cxv_tamanho.get_children():
             tamanho = botao.get_label()
@@ -120,18 +125,16 @@ class Aplicacao:
                 recipiente = botao.get_label()
                 print(f"Recipiente: {recipiente}")
 
-        adic = []
+        adic = "Adicionais: " 
         for botao in cxv_adicionais.get_children():
             adicional = botao.get_label()
             estado = botao.get_active()
             
             if estado == True:
                 adicional = botao.get_label()
-                adic.append(adicional)
-        Prt = "Adicionais: "
-        for ad in adic:
-            Prt.append(ad)
-        print(Prt)
+                adic += f" {adicional},"                
+        adic = adic[:-1] + "."
+        print(adic)
 
 
 
