@@ -35,11 +35,9 @@ class Aplicacao:
 
         self.pasta = "imagens_a"
 
-        self.lista_nomes = os.listdir(self.pasta)
-        self.lista_nomes.sort()
+        self.lista_nomes =retornar_nomes(self.pasta)
+
         atual = self.lista_nomes[self.cursor]
-        
-        lista_nomes = retornar_nomes(self.pasta)
 
         caminho = "{}/{}".format(self.pasta, atual)
 
